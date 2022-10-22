@@ -11,11 +11,12 @@ const corsOptions = {
 app.use(express.json());
 app.use(cors(corsOptions));
 
-const commentsByPostId = {};
+const commentsByPostId = [];
 
 app.get('/posts/:postId/comments', (req, res) => {
 	const { postId } = req.params;
-	return res.status(200).json({ comments: commentsByPostId[postId] });
+	const comments = commentsByPostId[postId] || [];
+	return res.status(200).json(comments);
 });
 
 app.post('/posts/:postId/comments', (req, res) => {
