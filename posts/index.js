@@ -22,7 +22,7 @@ app.post('/posts', async (req, res) => {
 	const { title } = req.body;
 	posts[id] = { id, title, comments: [] };
 
-	await axios.post('http://localhost:8000/events', {
+	await axios.post('http://event-bus-service:8000/events', {
 		type: 'PostCreated',
 		data: { id, title, comments: [] },
 	});
