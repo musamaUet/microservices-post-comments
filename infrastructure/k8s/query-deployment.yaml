@@ -1,0 +1,15 @@
+apiVersion: apps/v1
+kind: Deployment
+spec:
+  selector:
+    matchLabels:
+      app: query
+    replicas: 1
+  template:
+    labels:
+      app: query
+    spec:
+      containers:
+        - name: query
+          image: musamauet/query-service
+          imagePullPolicy: IfNotPersent

@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+spec:
+  selector:
+    replicas: 1
+    matchLabels:
+      app: comments
+  template:
+    metadata:
+      labels:  
+        app: comments
+    spec:
+      containers:
+        - name: comments
+          image: musamauet/comments-service
+          imagePullPolicy: IfNotPersent
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: comments-clusterip-service
+spec:
+  type: ClusterIP
+  selector:
+    labels:
+      app: comments
+  ports:
+    - name: comments
+      port: 5000
+      targetPort: 5000
+      protocol: TCP

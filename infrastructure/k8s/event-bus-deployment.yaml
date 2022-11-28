@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: event-bus-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: event-bus
+  template:
+    metadata:
+      labels:
+        app: event-bus
+    spec:
+      containers:
+        - name: event-bus
+          image: musamauet/event-bus-service
+          imagePullPolicy: IfNotPresent
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: event-bus-service
+spec:
+  type: ClusterIP
+  selector:
+    app: event-bus
+  ports:
+    - name: event-bus
+      port: 8000
+      targetPort: 8000
+      protocol: TCP
+
+

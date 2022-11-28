@@ -12,10 +12,10 @@ app.post('/events', (req, res) => {
 	try {
 		events.push(event);
 
-		axios.post('http://localhost:4000/events', event);
-		axios.post('http://localhost:5000/events', event);
-		axios.post('http://localhost:6001/events', event);
-		axios.post('http://localhost:7000/events', event);
+		axios.post('http://posts-clusterip-service:4000/events', event);
+		// axios.post('http://localhost:5000/events', event);
+		// axios.post('http://localhost:6001/events', event);
+		// axios.post('http://localhost:7000/events', event);
 		res.send({ status: 'OK' });
 	} catch (err) {
 		console.log('event server err', err);

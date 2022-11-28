@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: posts
+spec:
+  containers: 
+  # Dash symbol at the left side means that we want to add multiple containers inside our Pod,
+  # But right now, we have only one single object
+  - name: posts
+    image: musamauet/posts:0.0.1

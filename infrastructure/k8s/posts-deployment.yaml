@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: posts-deployment
+spec:
+  replicas: 1
+  selector:   # selectors will find all the labels which find the matchLabels
+    matchLabels:
+      app: posts
+  template:   # template is a section where we want to specify the exact configuration of a pod that we want to create
+    metadata:
+      labels:
+        app: posts
+    spec:
+      containers:
+        - name: posts
+          image: musamauet/posts-service
+          imagePullPolicy: IfNotPresent
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: posts-clusterip-service
+spec:
+  type: ClusterIP
+  selector:
+      app: posts
+  ports:
+    - name: posts
+      protocol: TCP
+      port: 4000
+      targetPort: 4000
