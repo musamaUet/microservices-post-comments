@@ -1,15 +1,32 @@
 apiVersion: apps/v1
 kind: Deployment
+metadata:
+  name: query-deployment
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: query
-    replicas: 1
   template:
-    labels:
-      app: query
+    metadata:
+      labels:
+        app: query
     spec:
       containers:
         - name: query
           image: musamauet/query-service
-          imagePullPolicy: IfNotPersent
+          imagePullPolicy: IfNotPresent
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: query-clusterip-service
+spec:
+  type: ClusterIP
+  selector:
+    app: query
+  ports:
+    - name: query
+      port: 6001
+      targetPort: 6001
+      protocol: TCP

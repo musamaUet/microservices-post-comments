@@ -1,19 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
+metadata:
+  name: comments-deployment
 spec:
+  replicas: 1
   selector:
-    replicas: 1
     matchLabels:
       app: comments
   template:
     metadata:
-      labels:  
+      labels:
         app: comments
     spec:
       containers:
         - name: comments
           image: musamauet/comments-service
-          imagePullPolicy: IfNotPersent
+          imagePullPolicy: IfNotPresent
 ---
 apiVersion: v1
 kind: Service
@@ -22,8 +24,7 @@ metadata:
 spec:
   type: ClusterIP
   selector:
-    labels:
-      app: comments
+    app: comments
   ports:
     - name: comments
       port: 5000
