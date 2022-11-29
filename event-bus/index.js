@@ -13,9 +13,9 @@ app.post('/events', (req, res) => {
 		events.push(event);
 
 		axios.post('http://posts-clusterip-service:4000/events', event);
-		// axios.post('http://localhost:5000/events', event);
-		// axios.post('http://localhost:6001/events', event);
-		// axios.post('http://localhost:7000/events', event);
+		axios.post('http://comments-deployment:5000/events', event);
+		axios.post('http://query-deployment:6001/events', event);
+		axios.post('http://moderation-deployment:7000/events', event);
 		res.send({ status: 'OK' });
 	} catch (err) {
 		console.log('event server err', err);
