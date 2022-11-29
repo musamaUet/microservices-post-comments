@@ -45,7 +45,7 @@ app.post('/events', async (req, res) => {
 		const comment = comments.find((comment) => comment.id === id);
 		comment.status = status;
 		try {
-			await axios.post('http://localhost:6001/events', {
+			await axios.post('http://query-deployment:6001/events', {
 				type: 'CommentUpdated',
 				data,
 			});
