@@ -17,7 +17,7 @@ app.get('/posts', (req, res) => {
 	return res.status(200).json(posts);
 });
 
-app.post('/posts', async (req, res) => {
+app.post('/posts/create', async (req, res) => {
 	const id = v4();
 	const { title } = req.body;
 	posts[id] = { id, title, comments: [] };
